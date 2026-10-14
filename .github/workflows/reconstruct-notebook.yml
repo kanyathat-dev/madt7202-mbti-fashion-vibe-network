@@ -24,8 +24,8 @@ jobs:
 
           payload_dir = Path(".github/notebook-payload")
           parts = sorted(payload_dir.glob("part-*"))
-          if len(parts) != 7:
-              raise RuntimeError(f"Expected 7 payload chunks, found {len(parts)}")
+          if len(parts) != 18:
+              raise RuntimeError(f"Expected 18 payload chunks, found {len(parts)}")
           payload = b"".join(path.read_bytes() for path in parts)
           notebook_bytes = gzip.decompress(base64.b64decode(payload))
           notebook_path = Path("MBTI_Fashion_Room_Network_Analytics.ipynb")
