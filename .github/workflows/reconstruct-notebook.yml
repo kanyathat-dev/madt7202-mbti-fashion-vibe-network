@@ -1,0 +1,43 @@
+name: Reconstruct notebook
+
+on:
+  push:
+    paths:
+      - ".github/notebook-payload.b64"
+
+permissions:
+  contents: write
+
+jobs:
+  reconstruct:
+    runs-on: ubuntu-latest
+    steps:
+      - name: Check out repository
+        uses: actions/checkout@v4
+
+      - name: Restore notebook JSON
+        run: |
+          python - <<'PY'
+          import base64
+          import gzip
+          from pathlib import Path
+
+          payload_path = Path(".github/notebook-payload.b64")
+          notebook_bytes = gzip.decompress(base64.b64decode(payload_path.read_bytes()))
+          notebook_path = Path("MBTI_Fashion_Room_Network_Analytics.ipynb")
+          notebook_path.write_bytes(notebook_bytes)
+          payload_path.unlink()
+          print(f"Restored {notebook_path} ({len(notebook_bytes):,} bytes)")
+          PY
+
+      - name: Commit restored notebook
+        run: |
+          git config user.name "github-actions[bot]"
+          git config user.email "41898282+github-actions[bot]@users.noreply.github.com"
+          git add MBTI_Fashion_Room_Network_Analytics.ipynb .github/notebook-payload.b64
+          if git diff --cached --quiet; then
+            echo "No changes to commit."
+            exit 0
+          fi
+          git commit -m "Add Colab analysis notebook"
+          git push
