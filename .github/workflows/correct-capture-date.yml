@@ -1,0 +1,20 @@
+name: Correct image capture date
+on:
+  push:
+    paths:
+      - ".github/capture-date-correction.trigger"
+permissions:
+  contents: write
+jobs:
+  correct:
+    runs-on: ubuntu-latest
+    steps:
+      - uses: actions/checkout@v4
+      - run: python -m pip install --quiet pymupdf
+      - run: python .github/scripts/correct_capture_date.py
+      - run: |
+          git config user.name "github-actions[bot]"
+          git config user.email "41898282+github-actions[bot]@users.noreply.github.com"
+          git add MBTI_Fashion_Room_Network_Analytics.ipynb "6810424002_Kanyathat Rakdee_MBTI_Fashion_Room_Network_Analytics_Midterm.pdf"
+          git commit -m "Correct image capture date to 27 September 2026"
+          git push
