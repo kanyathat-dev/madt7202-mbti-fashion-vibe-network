@@ -15,7 +15,7 @@ This is an exploratory network analysis. It does not establish that MBTI causes 
 
 ## Notebook
 
-Open the [Google Colab notebook](https://colab.research.google.com/drive/1a6PxetaHc75K0ae7KYHsezqhQ93kY9j9) to view and run the analysis. The notebook file is intended to be included in this repository as `MBTI_Fashion_Room_Network_Analytics.ipynb`.
+Open the [Google Colab notebook](https://colab.research.google.com/drive/1a6PxetaHc75K0ae7KYHsezqhQ93kY9j9) to view and run the analysis. The notebook is also stored in this repository as [`MBTI_Fashion_Room_Network_Analytics.ipynb`](./MBTI_Fashion_Room_Network_Analytics.ipynb).
 
 ## Analytical Pipeline
 
