@@ -1,0 +1,31 @@
+name: Restore data and coding period
+
+on:
+  push:
+    paths:
+      - ".github/restore-period.trigger"
+
+permissions:
+  contents: write
+
+jobs:
+  restore-period:
+    runs-on: ubuntu-latest
+    steps:
+      - name: Check out repository
+        uses: actions/checkout@v4
+      - name: Install PDF tooling
+        run: python -m pip install --quiet pymupdf
+      - name: Restore Notebook and PDF dates
+        run: python .github/scripts/restore_date_period.py
+      - name: Commit restored files and remove temporary helpers
+        run: |
+          rm -f .github/restore-period.trigger
+          rm -f .github/scripts/restore_date_period.py
+          rm -f .github/workflows/restore-date-period.yml
+          git config user.name "github-actions[bot]"
+          git config user.email "41898282+github-actions[bot]@users.noreply.github.com"
+          git add MBTI_Fashion_Room_Network_Analytics.ipynb "6810424002 Kanyathat Rakdee_MBTI_Fashion_Room_Network_Analytics_Midterm.pdf"
+          git add -u .github
+          git commit -m "Restore data and coding period to 27 September–7 October 2026"
+          git push
