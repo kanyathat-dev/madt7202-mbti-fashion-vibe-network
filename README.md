@@ -3,7 +3,7 @@
 **Course:** MADT7202 — Web & Social Network Analytics (Midterm Project)  
 **Author:** Kanyathat Rakdee  
 **Student ID:** 6810424002  
-**Image capture date:** 27 September 2026 (single-day capture)
+**Data and coding period:** 27 September to 7 October 2026
 
 ## Project Overview
 
@@ -22,7 +22,7 @@ This is an exploratory network analysis. It does not establish that MBTI causes 
 ## Analytical Pipeline
 
 ### 1. Data and Audit Trail
-- 67 public TikTok lookbook images captured from six anonymized creator accounts (A–F) on **27 September 2026**.
+- 67 public TikTok lookbook images captured on **27 September 2026** from six anonymized creator accounts (A–F); AI-assisted coding and dataset preparation continued through **7 October 2026**.
 - Four coded attributes per image: 268 attribute observations in total.
 - Image-level sample size: **N = 67**; attribute rows are not independent images.
 - Data-integrity assertions check expected row and image counts, four attributes per image, one Fashion Vibe per image, and 16 MBTI labels / 12 Fashion Vibe categories.
