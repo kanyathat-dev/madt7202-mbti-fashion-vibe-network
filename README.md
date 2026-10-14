@@ -74,5 +74,5 @@ The sample is small and concentrated among a subset of creators. Results depend 
 
 ## Repository Contents
 
-- `MBTI_Fashion_Room_Network_Analytics.ipynb` — project narrative and end-to-end analysis code (to be added).
+- [`MBTI_Fashion_Room_Network_Analytics.ipynb`](./MBTI_Fashion_Room_Network_Analytics.ipynb) — project narrative and end-to-end analysis code.
 - `README.md` — project framing, pipeline, reported findings, run instructions, and limitations.
