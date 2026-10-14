@@ -1,13 +1,13 @@
 # Raw Lookbook Images
 
 **Project:** MADT7202 — MBTI–Fashion Vibe Network  
-**Collection window:** 27 September to 7 October 2026
+**Capture date:** 27 September 2026 (single-day capture)
 
 > **Ingestion status:** This folder has been created for the dataset, but the raw-image set is not yet complete. Do not treat the repository as containing the full 67-image dataset until all 67 uniquely mapped JPEG files are present and the generated manifest passes validation.
 
 ## Purpose and source
 
-This directory is the designated location for the **67 raw lookbook images** collected from public TikTok content across six anonymized creators (Creators A–F) during **27 September to 7 October 2026**. These images are the source-level evidence for the **268 coded attribute observations** used in the MADT7202 MBTI–Fashion Vibe Network analysis (four coded attributes per image).
+This directory is the designated location for the **67 raw lookbook images** collected from public TikTok content across six anonymized creators (Creators A–F) on **27 September 2026**. These images are the source-level evidence for the **268 coded attribute observations** used in the MADT7202 MBTI–Fashion Vibe Network analysis (four coded attributes per image).
 
 ## File naming and data lineage
 
