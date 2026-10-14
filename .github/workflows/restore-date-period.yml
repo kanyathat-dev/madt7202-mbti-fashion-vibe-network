@@ -25,7 +25,7 @@ jobs:
           rm -f .github/workflows/restore-date-period.yml
           git config user.name "github-actions[bot]"
           git config user.email "41898282+github-actions[bot]@users.noreply.github.com"
-          git add MBTI_Fashion_Room_Network_Analytics.ipynb "6810424002 Kanyathat Rakdee_MBTI_Fashion_Room_Network_Analytics_Midterm.pdf"
+          git add MBTI_Fashion_Room_Network_Analytics.ipynb "6810424002_Kanyathat Rakdee_MBTI_Fashion_Room_Network_Analytics_Midterm.pdf"
           git add -u .github
           git commit -m "Restore data and coding period to 27 September–7 October 2026"
           git push
