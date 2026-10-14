@@ -13,9 +13,11 @@ This project explores how a bipartite network can support early-stage identifica
 
 This is an exploratory network analysis. It does not establish that MBTI causes aesthetic preferences, validate individuals' personality types, or prove relationship compatibility. Recommendations remain hypotheses that require validation with real customers.
 
-## Notebook
+## Project Files
 
-Open the [Google Colab notebook](https://colab.research.google.com/drive/1a6PxetaHc75K0ae7KYHsezqhQ93kY9j9) to view and run the analysis. The notebook is also stored in this repository as [`MBTI_Fashion_Room_Network_Analytics.ipynb`](./MBTI_Fashion_Room_Network_Analytics.ipynb).
+- **[Final English Report (PDF)](./6810424002_Kanyathat%20Rakdee_MBTI_Fashion_Room_Network_Analytics_Midterm.pdf)** — one-page report with the business decision, data and bias controls, graph construction, findings, recommended actions, and limitations.
+- **[Jupyter Notebook](./MBTI_Fashion_Room_Network_Analytics.ipynb)** — notebook with the project narrative and analysis code.
+- **[Open in Google Colab](https://colab.research.google.com/drive/1a6PxetaHc75K0ae7KYHsezqhQ93kY9j9)** — run and inspect the analysis interactively.
 
 ## Analytical Pipeline
 
@@ -74,5 +76,6 @@ The sample is small and concentrated among a subset of creators. Results depend 
 
 ## Repository Contents
 
+- [`6810424002_Kanyathat Rakdee_MBTI_Fashion_Room_Network_Analytics_Midterm.pdf`](./6810424002_Kanyathat%20Rakdee_MBTI_Fashion_Room_Network_Analytics_Midterm.pdf) — final English one-page report.
 - [`MBTI_Fashion_Room_Network_Analytics.ipynb`](./MBTI_Fashion_Room_Network_Analytics.ipynb) — project narrative and end-to-end analysis code.
 - `README.md` — project framing, pipeline, reported findings, run instructions, and limitations.
