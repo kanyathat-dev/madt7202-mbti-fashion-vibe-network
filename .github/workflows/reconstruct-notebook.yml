@@ -1,4 +1,4 @@
-name: Reconstruct notebook
+name: Import Colab notebook
 
 on:
   push:
@@ -9,38 +9,45 @@ permissions:
   contents: write
 
 jobs:
-  reconstruct:
+  import-notebook:
     runs-on: ubuntu-latest
     steps:
       - name: Check out repository
         uses: actions/checkout@v4
 
-      - name: Restore notebook JSON
+      - name: Download and validate the shared Colab notebook
         run: |
           python - <<'PY'
-          import base64
-          import gzip
+          import json
           from pathlib import Path
+          from urllib.request import Request, urlopen
 
-          payload_dir = Path(".github/notebook-payload")
-          parts = sorted(payload_dir.glob("part-*"))
-          if len(parts) != 18:
-              raise RuntimeError(f"Expected 18 payload chunks, found {len(parts)}")
-          payload = b"".join(path.read_bytes() for path in parts)
-          notebook_bytes = gzip.decompress(base64.b64decode(payload))
-          notebook_path = Path("MBTI_Fashion_Room_Network_Analytics.ipynb")
-          notebook_path.write_bytes(notebook_bytes)
-          for path in parts:
-              path.unlink()
-          payload_dir.rmdir()
-          Path(".github/notebook-payload.trigger").unlink()
-          print(f"Restored {notebook_path} ({len(notebook_bytes):,} bytes)")
+          url = "https://drive.google.com/uc?export=download&id=1a6PxetaHc75K0ae7KYHsezqhQ93kY9j9"
+          request = Request(url, headers={"User-Agent": "Mozilla/5.0"})
+          with urlopen(request, timeout=60) as response:
+              raw = response.read()
+
+          notebook = json.loads(raw.decode("utf-8"))
+          if notebook.get("nbformat") != 4 or not isinstance(notebook.get("cells"), list):
+              raise RuntimeError("The shared Drive URL did not return a valid Jupyter notebook.")
+          if not notebook["cells"]:
+              raise RuntimeError("The downloaded notebook has no cells.")
+
+          title = "".join(notebook["cells"][0].get("source", []))
+          if "MBTI" not in title or "Fashion Vibe" not in title:
+              raise RuntimeError("The downloaded notebook title does not match this project.")
+
+          target = Path("MBTI_Fashion_Room_Network_Analytics.ipynb")
+          target.write_bytes(raw)
+          print(f"Validated {target}: {len(notebook['cells'])} cells, {len(raw):,} bytes")
           PY
 
-      - name: Commit restored notebook and clean up
+      - name: Commit notebook and remove temporary transfer files
         run: |
           git config user.name "github-actions[bot]"
           git config user.email "41898282+github-actions[bot]@users.noreply.github.com"
+          rm -rf .github/notebook-payload
+          rm -f .github/notebook-payload.trigger .github/workflows/reconstruct-notebook.yml
           git add -A
           if git diff --cached --quiet; then
             echo "No changes to commit."
