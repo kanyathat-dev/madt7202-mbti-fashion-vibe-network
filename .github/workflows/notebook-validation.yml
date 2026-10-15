@@ -1,0 +1,72 @@
+name: Validate MADT7202 notebook
+
+on:
+  push:
+    branches: [main]
+    paths:
+      - "MBTI_Fashion_Room_Network_Analytics.ipynb"
+      - "data/raw_image_268_rows.csv"
+      - ".github/workflows/notebook-validation.yml"
+  workflow_dispatch:
+
+permissions:
+  contents: read
+
+jobs:
+  execute-notebook:
+    runs-on: ubuntu-latest
+    timeout-minutes: 10
+    steps:
+      - name: Check out repository
+        uses: actions/checkout@v4
+      - name: Set up Python
+        uses: actions/setup-python@v5
+        with:
+          python-version: "3.11"
+      - name: Install notebook dependencies
+        run: |
+          python -m pip install --upgrade pip
+          python -m pip install pandas networkx matplotlib requests ipywidgets jupyter nbconvert
+      - name: Execute all notebook cells
+        run: |
+          mkdir -p /tmp/executed
+          jupyter nbconvert --to notebook --execute \
+            --ExecutePreprocessor.timeout=300 \
+            --output-dir=/tmp/executed \
+            --output=MBTI_Fashion_Room_Network_Analytics.executed.ipynb \
+            MBTI_Fashion_Room_Network_Analytics.ipynb
+      - name: Assert regenerated baseline metrics
+        run: |
+          python - <<'PY'
+          import nbformat
+          from pathlib import Path
+
+          path = Path("/tmp/executed/MBTI_Fashion_Room_Network_Analytics.executed.ipynb")
+          nb = nbformat.read(path, as_version=4)
+          errors = []
+          streams = []
+          for cell in nb.cells:
+              if cell.cell_type != "code":
+                  continue
+              for output in cell.get("outputs", []):
+                  if output.output_type == "error":
+                      errors.append(f"{output.ename}: {output.evalue}")
+                  if output.output_type == "stream":
+                      streams.append(output.text)
+          assert not errors, "\n".join(errors)
+          text = "\n".join(streams)
+          required = [
+              "DATA INTEGRITY CHECKS: PASS",
+              "Evidence rows: 268 | raw files: 67 | image IDs: 67",
+              "Graph: 28 nodes | 51 retained positive-NPMI edges",
+              "58/120 = 48.3%",
+              "weighted betweenness = 0.3134",
+              "bridge load = 33.0 fractional path-load units",
+              "Playful-Streetwear stays top in 4/6 runs.",
+              "MINIMUM CO-OCCURRENCE THRESHOLD SENSITIVITY",
+          ]
+          missing = [item for item in required if item not in text]
+          assert not missing, f"Missing expected results: {missing}"
+          print("Notebook execution and baseline metric assertions passed.")
+          print("\n".join(item for item in required))
+          PY
