@@ -25,7 +25,7 @@ This is an exploratory network analysis. It does not establish that MBTI causes 
 - 67 public TikTok lookbook images captured on **27 September 2026** from six anonymized creator accounts (A–F); AI-assisted coding and dataset preparation continued through **7 October 2026**.
 - The notebook reads `data/raw_image_268_rows.csv` as the source of truth: 268 evidence rows across 67 image IDs (four coded observations per image).
 - Image-level sample size: **N = 67**; the 268 evidence rows are not independent source images.
-- Data-integrity assertions check expected row and image counts, four attributes per image, one Fashion Vibe per image, and 16 MBTI labels / 12 Fashion Vibe categories.
+- Assertions check the row count, one row per `_L1` through `_L4` suffix per image ID, stable labels within each image group, a one-to-one raw-name / proxy-name mapping, and all 16 MBTI labels / 12 Fashion Vibe categories. The notebook checks raw filenames against the repository image directory and records the source CSV SHA-256. This verifies file presence and the mapping declared by the CSV, not independently verified pixel-level correspondence between raw images and proxy filenames.
 
 ### 2. Analyze and Network Topology
 - Bipartite graph with 16 MBTI nodes and 12 Fashion Vibe nodes.
@@ -61,7 +61,7 @@ The notebook regenerates these metrics from the source CSV. Bridge Load is the a
 1. Open the Google Colab notebook linked above or open `MBTI_Fashion_Room_Network_Analytics.ipynb` in a compatible Jupyter environment with internet access.
 2. Select **Runtime → Run all**. The notebook downloads the committed CSV and queries the GitHub API to verify raw image filename presence.
 3. Review the integrity output, network metrics, sensitivity tables, figure, Couple Matcher, and interactive network output. The notebook is split into data validation, image-level aggregation, network metrics, sensitivity analysis, static visualization, and interactive visualization cells.
-4. Confirm that the executed outputs match the values described in the notebook before citing them in the report.
+4. Confirm that generated CSVs and figures exist and inspect all outputs. The notebook is executed by GitHub Actions and baseline assertions check 268 evidence rows, 67 images, 28 graph nodes, 51 retained edges, weighted betweenness 0.3134, Bridge Load 33.0, and 58/120 no-overlap pairs (48.3%). Do not silently alter results to force agreement with a narrative.
 
 ## Data, Coding, and Reference Notes
 
