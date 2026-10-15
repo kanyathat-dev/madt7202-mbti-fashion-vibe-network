@@ -36,6 +36,9 @@ try:
         pdfmetrics.registerFont(TTFont('DV', str(font_dir / 'DejaVuSans.ttf')))
         pdfmetrics.registerFont(TTFont('DV-Bold', str(font_dir / 'DejaVuSans-Bold.ttf')))
         pdfmetrics.registerFont(TTFont('DV-Oblique', str(font_dir / 'DejaVuSans-Oblique.ttf')))
+        # Map paragraph <b> tags to the embedded bold font so emphasis is visible in the PDF.
+        pdfmetrics.registerFontFamily('DV', normal='DV', bold='DV-Bold',
+                                      italic='DV-Oblique', boldItalic='DV-Bold')
         FONT, FONT_BOLD, FONT_ITALIC = 'DV', 'DV-Bold', 'DV-Oblique'
 except Exception as exc:
     print(f'Warning: using built-in fonts: {exc}')
@@ -174,7 +177,7 @@ def build_report(output_path: Path, graph_path: Path, root: Path):
     draw_section(c, X2, 724, '02 Why a Network', COL_W)
     draw_para(c, 'Frequency alone does not show which MBTI categories share observed Vibe links. A <b>bipartite network</b> and weighted shortest paths identify structural bridges for pairs with no shared direct Vibe. These are coded-data patterns, not proof of psychological compatibility or actual customer preference.', X2, 710, COL_W, 'body')
 
-    company_url = 'https://www.themyersbriggs.com/en-US/Explore-Solutions/MBTI?type=page'
+    company_url = 'https://www.myersbriggs.org/my-mbti-personality-type/the-16-mbti-personality-types/'
     data_top = 635
     draw_section(c, X1, data_top, '03 Data', COL_W)
     draw_section(c, X2, data_top, '04 Graph Construction', COL_W)
