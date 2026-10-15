@@ -23,8 +23,8 @@ This is an exploratory network analysis. It does not establish that MBTI causes 
 
 ### 1. Data and Audit Trail
 - 67 public TikTok lookbook images captured on **27 September 2026** from six anonymized creator accounts (A–F); AI-assisted coding and dataset preparation continued through **7 October 2026**.
-- Four coded attributes per image: 268 attribute observations in total.
-- Image-level sample size: **N = 67**; attribute rows are not independent images.
+- The notebook reads `data/raw_image_268_rows.csv` as the source of truth: 268 evidence rows across 67 image IDs (four coded observations per image).
+- Image-level sample size: **N = 67**; the 268 evidence rows are not independent source images.
 - Data-integrity assertions check expected row and image counts, four attributes per image, one Fashion Vibe per image, and 16 MBTI labels / 12 Fashion Vibe categories.
 
 ### 2. Analyze and Network Topology
@@ -54,13 +54,13 @@ Generated files are written by the notebook when the relevant code executes succ
 - **58 of 120 MBTI pairs (48.3%)** have no shared direct Fashion Vibe in the observed network. This percentage is distinct from Bridge Load; the latter sums fractional contributions over weighted shortest paths and is not a percentage of pairs.
 - The notebook examines an ESTJ–INFP indirect mediation example, conducts six leave-one-creator-out runs, and varies minimum co-occurrence thresholds (1, 2, and 3). Threshold results include graph coverage, connected components, and unreachable pairs.
 
-These values are reported by the current notebook narrative and should be checked against the executed outputs before being treated as final. Network centrality represents structure in this sample, not proof of consumer preference or relationship compatibility.
+The notebook regenerates these metrics from the source CSV. Bridge Load is the accumulated fractional contribution over weighted shortest paths for no-overlap pairs, not a count of unique pairs or a percentage. Network centrality represents structure in this sample, not proof of consumer preference or relationship compatibility. The leave-one-creator-out sensitivity changes the top bridge in two of six runs; therefore the business recommendation is a shortlist to test, not a universal default.
 
 ## How to Run
 
-1. Open the Google Colab notebook linked above or open `MBTI_Fashion_Room_Network_Analytics.ipynb` in a compatible Jupyter environment.
-2. In Colab, select **Runtime → Run all**.
-3. Wait for execution to finish and inspect the data-integrity checks, network metrics, figure, Couple Matcher, and interactive network output.
+1. Open the Google Colab notebook linked above or open `MBTI_Fashion_Room_Network_Analytics.ipynb` in a compatible Jupyter environment with internet access.
+2. Select **Runtime → Run all**. The notebook downloads the committed CSV and queries the GitHub API to verify raw image filename presence.
+3. Review the integrity output, network metrics, sensitivity tables, figure, Couple Matcher, and interactive network output. The notebook is split into data validation, image-level aggregation, network metrics, sensitivity analysis, static visualization, and interactive visualization cells.
 4. Confirm that the executed outputs match the values described in the notebook before citing them in the report.
 
 ## Data, Coding, and Reference Notes
@@ -80,3 +80,8 @@ The sample is small and concentrated among a subset of creators. Results depend 
 - [`6810424002_Kanyathat Rakdee_MBTI_Fashion_Room_Network_Analytics_Midterm.pdf`](./6810424002_Kanyathat%20Rakdee_MBTI_Fashion_Room_Network_Analytics_Midterm.pdf) — final English one-page report.
 - [`MBTI_Fashion_Room_Network_Analytics.ipynb`](./MBTI_Fashion_Room_Network_Analytics.ipynb) — project narrative and end-to-end analysis code.
 - `README.md` — project framing, pipeline, reported findings, run instructions, and limitations.
+
+
+## Reproducibility checks
+
+The notebook regenerates the coded-data audit, image-level table, network metrics, leave-one-creator-out results, threshold sensitivity results, static figure, and interactive network HTML. A GitHub Actions workflow executes the notebook and checks baseline outputs when the notebook, source CSV, or workflow changes. The 67-row mapping audit is committed at [`data/image_mapping_audit.csv`](./data/image_mapping_audit.csv).
