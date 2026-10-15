@@ -5,6 +5,14 @@
 **Student ID:** 6810424002  
 **Data and coding period:** 27 September to 7 October 2026
 
+## Network Visualization
+
+<p align="center">
+  <img src="./mbti_network_topology_labeled.png" alt="Labeled MBTI–Fashion Vibe bipartite network showing MBTI nodes, Fashion Vibe nodes, and the highlighted mediation path" width="900">
+</p>
+
+*Labeled bipartite network: 16 MBTI nodes, 12 Fashion Vibe nodes, and 51 retained positive-NPMI edges. The highlighted path illustrates the ESTJ–INFP indirect mediation example.*
+
 ## Project Overview
 
 This project explores how a bipartite network can support early-stage identification of a potential **Living Room Anchor** and **Compromise Bridge** for newlywed couples whose MBTI labels differ. The notebook analyzes observed co-occurrence patterns between MBTI labels and Fashion Vibe categories and translates them into hypotheses for furniture collection planning and a future style-recommendation tool.
