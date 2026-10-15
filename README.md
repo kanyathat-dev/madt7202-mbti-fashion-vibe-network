@@ -41,17 +41,18 @@ The notebook includes code for:
 - An interactive network HTML view for examining nodes, connected entities, and edge weights.
 
 Generated files are written by the notebook when the relevant code executes successfully:
-- `mbti_fashion_coded_data_audit.csv`
-- `mbti_fashion_image_level.csv`
-- `mbti_network_topology_labeled.png`
-- `mbti_fashion_vibe_network.html`
+- `image_mapping_audit.csv` — one row per raw image with mapping caveat and repository-presence check
+- `mbti_fashion_coded_data_audit.csv` and `mbti_fashion_image_level.csv`
+- `mbti_vibe_network_metrics.csv`
+- `leave_one_creator_out_sensitivity.csv` and `npmi_threshold_sensitivity.csv`
+- `mbti_network_topology_labeled.png` and `mbti_fashion_vibe_network.html`
 
 ## Findings Reported in the Notebook
 
 - **Clean-Traditional** is explored as a Living Room Anchor candidate (degree 8; reported MBTI-pair coverage 28/120, or 23.3%).
-- **Playful-Streetwear** is explored as a Compromise Bridge candidate (reported weighted betweenness 0.3134; reported bridge load 34.8/58 no-overlap pairs, or 48.3%).
-- **58 of 120 MBTI pairs (48%)** are reported as having no shared direct Fashion Vibe in the observed network.
-- The notebook examines an ESTJ–INFP indirect mediation example and conducts six leave-one-creator-out runs.
+- **Playful-Streetwear** is the baseline Compromise Bridge candidate (weighted betweenness **0.3134**; Bridge Load **33.0 fractional path-load units**).
+- **58 of 120 MBTI pairs (48.3%)** have no shared direct Fashion Vibe in the observed network. This percentage is distinct from Bridge Load; the latter sums fractional contributions over weighted shortest paths and is not a percentage of pairs.
+- The notebook examines an ESTJ–INFP indirect mediation example, conducts six leave-one-creator-out runs, and varies minimum co-occurrence thresholds (1, 2, and 3). Threshold results include graph coverage, connected components, and unreachable pairs.
 
 These values are reported by the current notebook narrative and should be checked against the executed outputs before being treated as final. Network centrality represents structure in this sample, not proof of consumer preference or relationship compatibility.
 
