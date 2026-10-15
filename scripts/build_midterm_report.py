@@ -211,9 +211,14 @@ def build_report(output_path: Path, graph_path: Path, root: Path):
     img.drawWidth, img.drawHeight = img_w, img_h
     img.drawOn(c, img_x, img_y)
     caption_top = img_y - 1
-    draw_para(c, 'ESTJ and INFP have zero shared direct Vibe; highlighted mediation path: Sharp-Tailored → Dark-Perfectionist → Earthy-Raw.', M+10, caption_top, CONTENT_W-20, 'caption')
+    caption_bottom, caption_height = draw_para(
+        c,
+        'ESTJ and INFP have zero shared direct Vibe; highlighted mediation path: Sharp-Tailored → Dark-Perfectionist → Earthy-Raw.',
+        M+10, caption_top, CONTENT_W-20, 'caption'
+    )
 
-    findings_top = caption_top - 14
+    # Position section 06 from the caption's actual bottom to keep a clear gap.
+    findings_top = caption_bottom - 15
     draw_section(c, M, findings_top, '06 Findings', CONTENT_W)
     card_top = findings_top - 12
     card_gap = 7
